@@ -5,6 +5,32 @@ AWS.config.setPromisesDependency(require("bluebird"));
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+module.exports.addMeal = (event, context, callback) => {
+  const requestBody = JSON.parse(event.body);
+  // const mealName = requestBody.mealName;
+  // const ingredients = requestBody.ingredients;
+  const {mealName, ingredients} = requestBody;
+
+  submitMeal(mealInfo(mealName, ingredients))
+    .then(res => {
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: `Sucessfully submitted meal with name ${mealName}`,
+      })
+    });
+  })
+  .catch(err =>  {
+    console.log(err);
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: `Unable to submit meal with name ${mealName}`
+      })
+    })
+  });
+}
+
 const submitMeal = (meal) => {
   console.log("Submitting meal");
   const mealInfo = {
