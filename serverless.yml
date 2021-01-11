@@ -77,6 +77,12 @@ functions:
       - http:
           method: post
           path: add_meal
+  read-meal:
+    handler: api/meal-read.readMeals
+    events:
+      - http:
+          method: get
+          path: meals
   # hello:
   #   handler: handler.hello
 #    The following are a few example events you can configure
