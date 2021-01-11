@@ -75,7 +75,7 @@ functions:
     handler: meal-create.addMeal
     events:
       - http:
-          method: get
+          method: post
           path: add_meal
   # hello:
   #   handler: handler.hello
