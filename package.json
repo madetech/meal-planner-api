@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/madetech/meal-planner-api#readme",
   "dependencies": {
-    "aws-sdk": "^2.824.0"
+    "aws-sdk": "^2.824.0",
+    "bluebird": "^3.7.2"
   }
 }
