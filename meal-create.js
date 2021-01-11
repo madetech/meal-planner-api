@@ -5,7 +5,7 @@ module.exports.addMeal = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'This will be our add meal function',
+        message: 'This will be our add meal function - Emmas addition ',
         input: event,
       },
       null,

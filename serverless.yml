@@ -119,3 +119,19 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+resources: # CloudFormation template syntax from here on.
+      Resources:
+        mealTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: mealTable
+            AttributeDefinitions:
+              - AttributeName: mealName
+                AttributeType: S
+            KeySchema:
+              - AttributeName: mealName
+                KeyType: HASH
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
