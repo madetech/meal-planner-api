@@ -18,13 +18,24 @@ service: meal-planner-api
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: dev
   lambdaHashingVersion: 20201221
   region: eu-west-2
+  environment:
+    MEAL_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "*"
 
 # you can overwrite defaults here
 #  stage: dev
@@ -121,17 +132,17 @@ functions:
 #       Value: "Some output value"
 
 resources: # CloudFormation template syntax from here on.
-      Resources:
-        mealTable:
-          Type: AWS::DynamoDB::Table
-          Properties:
-            TableName: mealTable
-            AttributeDefinitions:
-              - AttributeName: mealName
-                AttributeType: S
-            KeySchema:
-              - AttributeName: mealName
-                KeyType: HASH
-            ProvisionedThroughput:
-              ReadCapacityUnits: 1
-              WriteCapacityUnits: 1
+  Resources:
+    mealTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.MEAL_TABLE}
+        AttributeDefinitions:
+          - AttributeName: mealName
+            AttributeType: S
+        KeySchema:
+          - AttributeName: mealName
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

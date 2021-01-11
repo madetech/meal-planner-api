@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
+import * as AWS from "aws-sdk";
 
 module.exports.addMeal = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'This will be our add meal function - Emmas addition ',
+        message: "This will be our add meal function - Emmas addition ",
         input: event,
       },
       null,
