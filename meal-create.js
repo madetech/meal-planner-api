@@ -1,5 +1,6 @@
 "use strict";
-import * as AWS from "aws-sdk";
+
+const AWS = require('aws-sdk'); 
 
 AWS.config.setPromisesDependency(require("bluebird"));
 
