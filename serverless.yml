@@ -72,7 +72,7 @@ provider:
 
 functions:
   add-meal:
-    handler: meal-create.addMeal
+    handler: api/meal-create.addMeal
     events:
       - http:
           method: post
